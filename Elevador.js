@@ -1,47 +1,47 @@
 class Elevador {
   constructor(capacidade) {
-    this.capacidade = capacidade;
-    this.andarAtual = 0;
-    this.totalPessoas = 0;
+    this._capacidade = capacidade;
+    this._andarAtual = 0;
+    this._totalPessoas = 0;
   }
 
   get capacidade() {
-    return this.capacidade;
+    return this._capacidade;
   }
 
   get andarAtual() {
-    return this.andarAtual;
+    return this._andarAtual;
   }
 
   get totalPessoas() {
-    return this.totalPessoas;
+    return this._totalPessoas;
   }
 
   adicionarPessoa() {
-    if (this.totalPessoas < this.capacidade) {
-      this.totalPessoas++;
+    if (this._totalPessoas < this._capacidade) {
+      this._totalPessoas++;
     } else {
-      console.log("Elevador cheio.");
+      console.log("Elevador cheio! Selecione outro elevador.");
     }
   }
 
   removerPessoa() {
-    if (this.totalPessoas > 0) {
-      this.totalPessoas--;
+    if (this._totalPessoas > 0) {
+      this._totalPessoas--;
     } else {
-      console.log("Elevador vazio.");
+      console.log("Elevador vazio!");
     }
   }
 
   subir() {
-    this.andarAtual++;
+    this._andarAtual++;
   }
 
   descer() {
-    if (this.andarAtual > 0) {
-      this.andarAtual--;
+    if (this._andarAtual > 0) {
+      this._andarAtual--;
     } else {
-      console.log("O elevador já está no térreo.");
+      console.log("O elevador já está no térreo!");
     }
   }
 }
@@ -71,6 +71,7 @@ class SistemaElevadores {
 }
 
 const sistemaElevadores = new SistemaElevadores();
+
 const readline = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout
@@ -78,17 +79,17 @@ const readline = require("readline").createInterface({
 
 function mostrarMenu() {
   console.log(`
-  1- Criar novo elevador;
-  2- Inserir pessoa em um elevador;
-  3- Retirar pessoa de um elevador;
-  4- Conferir a capacidade de pessoas do elevador;
-  5- Conferir o total de pessoas que estão no elevador;
-  6- Fazer o elevador subir um andar;
-  7- Fazer o elevador descer um andar;
-  8- Verificar em qual andar o elevador se encontra no momento;
-  9- Sair do sistema;
-  `);
-  readline.question("Escolha um opção: ", (opcao) => {
+1- Criar novo elevador;
+2- Inserir pessoa em um elevador;
+3- Retirar pessoa de um elevador;
+4- Conferir a capacidade de pessoas do elevador;
+5- Conferir o total de pessoas que estão no elevador;
+6- Fazer o elevador subir um andar;
+7- Fazer o elevador descer um andar;
+8- Verificar em qual andar o elevador se encontra no momento;
+9- Sair do sistema;
+`);
+  readline.question("Escolha uma opção: ", (opcao) => {
     lidarComOpcao(opcao);
   });
 }
@@ -106,7 +107,7 @@ function lidarComOpcao(opcao) {
         if (sistemaElevadores.elevadores[indice - 1]) {
           sistemaElevadores.elevadores[indice - 1].adicionarPessoa();
         } else {
-          console.log("Elevador não encontrado.");
+          console.log("Elevador não encontrado!");
         }
         mostrarMenu();
       });
@@ -116,7 +117,7 @@ function lidarComOpcao(opcao) {
         if (sistemaElevadores.elevadores[indice - 1]) {
           sistemaElevadores.elevadores[indice - 1].removerPessoa();
         } else {
-          console.log("Elevador não encontrado.");
+          console.log("Elevador não encontrado!");
         }
         mostrarMenu();
       });
@@ -126,11 +127,11 @@ function lidarComOpcao(opcao) {
         if (sistemaElevadores.elevadores[indice - 1]) {
           console.log(
             `Capacidade do elevador: ${
-              SistemaElevadores.elevadores[indice - 1].capacidade
+              sistemaElevadores.elevadores[indice - 1].capacidade
             }`
           );
         } else {
-          console.log("Elevador não encontrado.");
+          console.log("Elevador não encontrado!");
         }
         mostrarMenu();
       });
@@ -140,11 +141,11 @@ function lidarComOpcao(opcao) {
         if (sistemaElevadores.elevadores[indice - 1]) {
           console.log(
             `Total de pessoas no elevador: ${
-              SistemaElevadores.elevadores[indice - 1].totalPessoas
+              sistemaElevadores.elevadores[indice - 1].totalPessoas
             }`
           );
         } else {
-          console.log("Elevador não encontrado.");
+          console.log("Elevador não encontrado!");
         }
         mostrarMenu();
       });
@@ -152,9 +153,9 @@ function lidarComOpcao(opcao) {
     case "6":
       readline.question("Escolha o elevador (1, 2, ...): ", (indice) => {
         if (sistemaElevadores.elevadores[indice - 1]) {
-          SistemaElevadores.elevadores[indice - 1].subir();
+          sistemaElevadores.elevadores[indice - 1].subir();
         } else {
-          console.log("Elevador não encontrado.");
+          console.log("Elevador não encontrado!");
         }
         mostrarMenu();
       });
@@ -162,9 +163,9 @@ function lidarComOpcao(opcao) {
     case "7":
       readline.question("Escolha o elevador (1, 2, ...): ", (indice) => {
         if (sistemaElevadores.elevadores[indice - 1]) {
-          SistemaElevadores.elevadores[indice - 1].descer();
+          sistemaElevadores.elevadores[indice - 1].descer();
         } else {
-          console.log("Elevador não encontrado.");
+          console.log("Elevador não encontrado!");
         }
         mostrarMenu();
       });
@@ -174,11 +175,11 @@ function lidarComOpcao(opcao) {
         if (sistemaElevadores.elevadores[indice - 1]) {
           console.log(
             `O elevador está no andar: ${
-              SistemaElevadores.elevadores[indice - 1].andarAtual
+              sistemaElevadores.elevadores[indice - 1].andarAtual
             }`
           );
         } else {
-          console.log("Elevador não encontrado.");
+          console.log("Elevador não encontrado!");
         }
         mostrarMenu();
       });
@@ -187,9 +188,10 @@ function lidarComOpcao(opcao) {
       readline.close();
       break;
     default:
-      console.log("Opção inválida.");
+      console.log("Opção inválida!");
       mostrarMenu();
       break;
   }
 }
+
 mostrarMenu();
