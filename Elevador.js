@@ -21,7 +21,7 @@ class Elevador {
     if (this.totalPessoas < this.capacidade) {
       this.totalPessoas++;
     } else {
-      console.log("Elevador cheiro.");
+      console.log("Elevador cheio.");
     }
   }
 
@@ -88,7 +88,7 @@ function mostrarMenu() {
   8- Verificar em qual andar o elevador se encontra no momento;
   9- Sair do sistema;
   `);
-  readline.question("Escolha um opção: ", (opção) => {
+  readline.question("Escolha um opção: ", (opcao) => {
     lidarComOpcao(opcao);
   });
 }
